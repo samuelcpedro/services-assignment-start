@@ -1,14 +1,13 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { CounterService } from './counter.service';
+import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class UsersService {
 
   activeUsers = ['Max', 'Anna'];
   inactiveUsers = ['Chris', 'Manu'];
 
-  constructor() { }
+  constructor(private counterService: CounterService) { }
 
   /**
    * Will insert a active user to the inactive
@@ -18,6 +17,7 @@ export class UsersService {
   onSetToInactive(id: number) {
     this.inactiveUsers.push(this.activeUsers[id]);
     this.activeUsers.splice(id, 1);
+    this.counterService.addInactiveUser();
   }
 
   /**
@@ -29,5 +29,6 @@ export class UsersService {
   onSetToActive(id: number) {
     this.activeUsers.push(this.inactiveUsers[id]);
     this.inactiveUsers.splice(id, 1);
+    this.counterService.addActiveUser();
   }
 }

@@ -18,6 +18,5 @@ export class InactiveUsersComponent {
    */
   onSetToActive(id: number) {
     this.usersService.onSetToActive(id);
-
   }
 }
